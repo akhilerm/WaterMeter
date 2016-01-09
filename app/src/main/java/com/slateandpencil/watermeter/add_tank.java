@@ -98,7 +98,7 @@ public class add_tank extends AppCompatActivity {
                 else{
                     resultSet=sb.rawQuery("select name,ip,port,enable from tank where num = "+tank_no+";",null);
                     resultSet.moveToNext();
-                    if(resultSet.getString(0).equals(name)&&resultSet.getString(1).equals(ip)&&resultSet.getString(2).equals(port)&&resultSet.getString(3).equals("1")){
+                    if(resultSet.getString(0).equals(name)&&resultSet.getString(1).equals(ip)&&resultSet.getString(2).equals(port)&&resultSet.getString(3).equals(""+enable)){
                         Toast.makeText(add_tank.this,"No changes made", Toast.LENGTH_SHORT).show();
                     }
                     else{

@@ -82,6 +82,7 @@ public class Tab1 extends Fragment {
                 int num= Integer.parseInt(resultSet.getString(0));
                 Toast.makeText(getActivity(), ""+num, Toast.LENGTH_SHORT).show();
                 intent.putExtra("tank_no",num);
+                intent.putExtra("tank_name",s);
                 Tab1.this.startActivity(intent);
 
             }

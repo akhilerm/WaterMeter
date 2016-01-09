@@ -63,13 +63,14 @@ public class Tab2 extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> adapter, View v, int position, long ld) {
 
-
+                String s=(String)adapter.getItemAtPosition(position);
                 Intent intent = new Intent(getActivity(), add_tank.class);
-
+                resultSet=sb.rawQuery("select num from tank where name ='"+s+"';",null);
+                resultSet.moveToNext();
+                int num=Integer.parseInt(resultSet.getString(0));
                 intent.putExtra("option", false);
-
-                Toast.makeText(getActivity(), (position+1) + "", Toast.LENGTH_SHORT).show();
-                intent.putExtra("tank_no", position + 1);
+                Toast.makeText(getActivity(),num+"", Toast.LENGTH_SHORT).show();
+                intent.putExtra("tank_no",num);
                 Tab2.this.startActivity(intent);
 
             }

@@ -96,10 +96,10 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-        IntentFilter filter = new IntentFilter(MyWebRequestReceiver.PROCESS_RESPONSE);
+        /*IntentFilter filter = new IntentFilter(MyWebRequestReceiver.PROCESS_RESPONSE);
 
         receiver = new MyWebRequestReceiver();
-        registerReceiver(receiver, filter);
+        registerReceiver(receiver, filter);*/
     }
 
     private void setupViewPager(ViewPager viewPager) {

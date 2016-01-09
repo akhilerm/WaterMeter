@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools" tools:context=".add_tank">
     <item
         android:id="@+id/save"
-        android:icon="@drawable/ic_done_white"
+        android:icon="@drawable/ic_save_white_24dp"
         app:showAsAction="always"/>
     <item
         android:id="@+id/delete"
