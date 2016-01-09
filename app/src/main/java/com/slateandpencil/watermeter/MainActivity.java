@@ -77,6 +77,8 @@ public class MainActivity extends AppCompatActivity {
         resultset.moveToNext();
         if (!resultset.getString(0).equals("0"))
             startService();
+        else
+            stopService();
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout) {
             @Override
             public void onPageSelected(int position) {
