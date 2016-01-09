@@ -29,6 +29,7 @@ public class Tab1 extends Fragment {
     SQLiteDatabase sb;
     Cursor resultSet=null;
     TextView textView;
+
     public Tab1()
     {
 
@@ -80,7 +81,7 @@ public class Tab1 extends Fragment {
                 resultSet=sb.rawQuery("select num from tank where name ='"+s+"';",null);
                 resultSet.moveToNext();
                 int num= Integer.parseInt(resultSet.getString(0));
-                Toast.makeText(getActivity(), ""+num, Toast.LENGTH_SHORT).show();
+
                 intent.putExtra("tank_no",num);
                 Tab1.this.startActivity(intent);
 

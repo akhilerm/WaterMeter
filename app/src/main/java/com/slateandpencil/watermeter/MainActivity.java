@@ -1,10 +1,7 @@
 package com.slateandpencil.watermeter;
 
 
-import android.content.BroadcastReceiver;
-import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v4.app.Fragment;
@@ -22,21 +19,17 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import static android.database.sqlite.SQLiteDatabase.openOrCreateDatabase;
 
 
 public class MainActivity extends AppCompatActivity {
     private File database;
     private Toolbar toolbar;
-    MyWebRequestReceiver receiver;
+
 
     private SQLiteDatabase sb;
     private TabLayout tabLayout;
@@ -62,6 +55,8 @@ public class MainActivity extends AppCompatActivity {
         } else {
             sb = openOrCreateDatabase("watermeter", MainActivity.MODE_PRIVATE, null);
         }
+
+        
         setContentView(R.layout.activity_main);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -96,10 +91,7 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-        IntentFilter filter = new IntentFilter(MyWebRequestReceiver.PROCESS_RESPONSE);
 
-        receiver = new MyWebRequestReceiver();
-        registerReceiver(receiver, filter);
     }
 
     private void setupViewPager(ViewPager viewPager) {
@@ -172,6 +164,8 @@ public class MainActivity extends AppCompatActivity {
 
     // Method to start the service
     public void startService() {
+        Log.e("inside start service","ok?");
+
         startService(new Intent(getBaseContext(), MyService.class));
     }
 
@@ -181,20 +175,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public class MyWebRequestReceiver extends BroadcastReceiver {
 
-        public static final String PROCESS_RESPONSE = "com.as400samplecode.intent.action.PROCESS_RESPONSE";
-
-        @Override
-        public void onReceive(Context context, Intent intent) {
-
-            int s=getIntent().getIntExtra("0",100);
-
-            Toast.makeText(getApplicationContext(),""+s,Toast.LENGTH_LONG).show();
-
-
-        }
-
-    }
 }
 
