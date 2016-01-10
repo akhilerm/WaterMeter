@@ -1,14 +1,12 @@
 package com.slateandpencil.watermeter;
 
-<<<<<<< HEAD
+import android.support.v7.app.AppCompatActivity;
 import android.graphics.Color;
 import android.graphics.drawable.AnimationDrawable;
-=======
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
->>>>>>> origin/master
 import android.os.Bundle;
 import android.os.IBinder;
 import android.support.design.widget.FloatingActionButton;
@@ -16,17 +14,17 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
-        import android.widget.ImageView;
+import android.widget.ImageView;
 import android.widget.Toast;
-
 import java.util.HashMap;
 
 
 public class display_level extends AppCompatActivity {
     MyService mservice;
-    HashMap<String,Integer> m=new HashMap<String,Integer>();
-    Intent intent1;
+    HashMap<Integer,Float> m=new HashMap<Integer,Float>();
 
 
     int n;//tank no of the  current tank whose level is to be known
@@ -38,13 +36,8 @@ public class display_level extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         setTitle(getIntent().getStringExtra("tank_name"));
-        ImageView imageView=(ImageView)findViewById(R.id.water_lvl);
-        int color= Color.parseColor("#ADD8E6");
-        imageView.setColorFilter(color);
-        ((AnimationDrawable) imageView.getBackground()).start();
-
-        intent1=getIntent();
-        n=intent1.getIntExtra("tank_no",0);
+        //ImageView imageView=(ImageView)findViewById(R.id.water_lvl);
+        n=getIntent().getIntExtra("tank_no",1);
           }
     @Override
     protected void onStart() {
@@ -66,13 +59,11 @@ public class display_level extends AppCompatActivity {
     public void show()  {
 
             m = (HashMap) mservice.display();
-            //String ip;
-            int port, lvl;
-            //ip=(String)m.get("ip"+n);
 
-            port = (int) m.get("port"+n);
-            lvl = (int) m.get("lvl" + n);
-            Toast.makeText(getApplicationContext(), "  port :" + port + " lvl:" + lvl, Toast.LENGTH_LONG).show();
+            float lvl;
+            lvl = (float) m.get(n);
+            Log.e("varunnilla",""+lvl);
+            Toast.makeText(getApplicationContext(), ""+lvl, Toast.LENGTH_LONG).show();
 
 
 
@@ -84,7 +75,7 @@ private ServiceConnection mconnection=new ServiceConnection(){
     public void onServiceConnected(ComponentName className,IBinder service)
     {
         MyService.binds   bind=(MyService.binds) service;
-        mservice=(MyService)bind.getService();
+        mservice=bind.getService();
 
             show();
 
@@ -97,6 +88,26 @@ private ServiceConnection mconnection=new ServiceConnection(){
     }
 
 };
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
 
 
+        getMenuInflater().inflate(R.menu.display_actions, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.refresh:
+                Log.e("refresh clicked","OK");
+                show();
+
+
+        }
+        return true;//return super.onOptionsSelected(MenuItem item);
+
+
+    }
 }

@@ -6,9 +6,9 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:showIn="@layout/activity_display_level"
     tools:context="com.slateandpencil.watermeter.display_level">
-    <ImageView
+   <!-- <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/water_lvl"
-        />
+        />-->
 </RelativeLayout>
