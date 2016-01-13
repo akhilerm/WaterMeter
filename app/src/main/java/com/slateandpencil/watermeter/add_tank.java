@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SwitchCompat;
 import android.support.v7.widget.Toolbar;
+import android.text.InputFilter;
+import android.text.Spanned;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -41,6 +43,27 @@ public class add_tank extends AppCompatActivity {
         ip_addr = (EditText) findViewById(R.id.input_ip);
         port_no = (EditText) findViewById(R.id.input_port);
         notification = (SwitchCompat) findViewById(R.id.Switch);
+        InputFilter[] filters = new InputFilter[1];
+        filters[0] = new InputFilter() {
+            public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {
+                if (end > start) {
+                    String destTxt = dest.toString();
+                    String resultingTxt = destTxt.substring(0, dstart) + source.subSequence(start, end) + destTxt.substring(dend);
+                    if (!resultingTxt.matches ("^\\d{1,3}(\\.(\\d{1,3}(\\.(\\d{1,3}(\\.(\\d{1,3})?)?)?)?)?)?")) {
+                        return "";
+                    } else {
+                        String[] splits = resultingTxt.split("\\.");
+                        for (int i=0; i<splits.length; i++) {
+                            if (Integer.valueOf(splits[i]) > 255) {
+                                return "";
+                            }
+                        }
+                    }
+                }
+                return null;
+            }
+        };
+        ip_addr.setFilters(filters);
         if(option==false){
             setTitle(R.string.action_settings);
             tank_no=getIntent().getIntExtra("tank_no", 1);
@@ -76,7 +99,7 @@ public class add_tank extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         SQLiteDatabase sb=openOrCreateDatabase("watermeter", MODE_PRIVATE, null);
         String name = tank_name.getText().toString();
-        String ip = ip_addr.getText().toString();
+        String ip=ip_addr.getText().toString();
         String port = port_no.getText().toString();
         int enable;
         int count = 0;

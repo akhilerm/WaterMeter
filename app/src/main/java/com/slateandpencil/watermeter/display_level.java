@@ -27,10 +27,10 @@ import java.util.HashMap;
 public class display_level extends AppCompatActivity {
     MyService mservice;
     HashMap<Integer,Float> m=new HashMap<Integer,Float>();
-    final ImageView imageView1 = (ImageView)findViewById(R.id.water_lvl1);
-    final ImageView imageView2 = (ImageView)findViewById(R.id.water_lvl2);
-    final ImageView imageView3 = (ImageView)findViewById(R.id.water_lvl3);
-    final ImageView imageView4 = (ImageView) findViewById(R.id.water_lvl4);
+    ImageView imageView1;
+    ImageView imageView2;
+    ImageView imageView3;
+    ImageView imageView4;
 
     int n;//tank no of the  current tank whose level is to be known
 
@@ -40,6 +40,10 @@ public class display_level extends AppCompatActivity {
         setContentView(R.layout.activity_display_level);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        imageView1 = (ImageView)findViewById(R.id.water_lvl1);
+        imageView2 = (ImageView)findViewById(R.id.water_lvl2);
+        imageView3 = (ImageView)findViewById(R.id.water_lvl3);
+        imageView4 = (ImageView)findViewById(R.id.water_lvl4);
         setTitle(getIntent().getStringExtra("tank_name"));
         n=getIntent().getIntExtra("tank_no",1);
           }
@@ -162,7 +166,7 @@ public class display_level extends AppCompatActivity {
             float lvl;
             lvl = (float) m.get(n);
             Log.e("varunnilla", "" + lvl);
-            draw(lvl);
+            draw(lvl/100);
 
         }
 
