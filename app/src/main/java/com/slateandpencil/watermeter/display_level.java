@@ -66,7 +66,7 @@ public class display_level extends AppCompatActivity {
 
     public void draw(float lvl){
         int color = Color.parseColor("#40A4DF");
-        float val=(float)(0.86*(1-lvl));
+        float val=(float)(0.86*(1-(lvl/100)));
         imageView1.setColorFilter(color);
         imageView2.setColorFilter(color);
         imageView3.setColorFilter(color);
@@ -89,7 +89,7 @@ public class display_level extends AppCompatActivity {
         imageView3.startAnimation(animation3);
         imageView4.startAnimation(animation4);
         //Animation for wave movement of water
-        switch((int)(lvl*10)){
+        /*switch((int)(lvl*10)){
             case 1:
                 val+=0.085;
                 break;
@@ -117,7 +117,8 @@ public class display_level extends AppCompatActivity {
             case 9:
                 val+=0.008;
                 break;
-        }
+        }*/
+       // if()
         final Animation animation5 = new TranslateAnimation(Animation.RELATIVE_TO_SELF, -1f, Animation.RELATIVE_TO_SELF, 0f, Animation.RELATIVE_TO_SELF, val, Animation.RELATIVE_TO_SELF, val);
         final Animation animation6 = new TranslateAnimation(Animation.RELATIVE_TO_SELF, 0f, Animation.RELATIVE_TO_SELF, 1f, Animation.RELATIVE_TO_SELF, val, Animation.RELATIVE_TO_SELF, val);
         final Animation animation7 = new TranslateAnimation(Animation.RELATIVE_TO_SELF, 1f, Animation.RELATIVE_TO_SELF, 0f, Animation.RELATIVE_TO_SELF, val, Animation.RELATIVE_TO_SELF, val);
@@ -166,7 +167,7 @@ public class display_level extends AppCompatActivity {
             float lvl;
             lvl = (float) m.get(n);
             Log.e("varunnilla", "" + lvl);
-            draw(lvl/100);
+            draw(lvl);
 
         }
 

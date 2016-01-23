@@ -97,6 +97,7 @@ public class MyService extends IntentService {
                     if(flag==true){
                         Intent resultIntent = new Intent(MyService.this, display_level.class);
                         resultIntent.putExtra("tank_no",t_num);
+						resultIntent.putExtra("tank_name",name);
                         TaskStackBuilder stackBuilder = TaskStackBuilder.create(MyService.this);
                         stackBuilder.addParentStack(display_level.class);
                         stackBuilder.addNextIntent(resultIntent);
