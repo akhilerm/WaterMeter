@@ -165,7 +165,7 @@ public class display_level extends AppCompatActivity {
             m = (HashMap) mservice.display();
 
             float lvl;
-            lvl = (float) m.get(n);
+            lvl = m.get(n);
             Log.e("varunnilla", "" + lvl);
             draw(lvl);
 
